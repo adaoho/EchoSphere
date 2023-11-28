@@ -12,11 +12,20 @@ const responseTypeDefs = `#graphql
         data: UserNoPassword
     }
 
+    type ResponseLoginUserToken {
+        token: String
+    }
+
     type ResponseLoginUser implements Response {
         statusCode: Int!
         message: String!
         error: String
-        access_token: String
+        data: ResponseLoginUserToken
+    }
+
+    type ResponseSeeding {
+        statusCode: Int!
+        message: String
     }
 `;
 

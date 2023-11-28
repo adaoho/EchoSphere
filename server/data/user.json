@@ -1,16 +1,14 @@
 [
   {
-    "_id": 1,
     "name": "Adnan Nugroho",
     "username": "adaoho",
-    "email": "adaoho@mail.com ",
+    "email": "adaoho@mail.com",
     "password": "12345678"
   },
   {
-    "_id": 2,
     "name": "Nugroho Adnan",
     "username": "ohoada",
-    "email": "ohoada@mail.com ",
+    "email": "ohoada@mail.com",
     "password": "12345678"
   }
 ]

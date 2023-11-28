@@ -3,7 +3,15 @@ const { getDatabase } = require("../config/mongoConnection");
 const { ObjectId } = require("mongodb");
 const user = require("../data/user.json");
 const { hashPassword } = require("../utils");
-const { postUserRegister, findUserById } = require("../models/userModels");
+const {
+  postUserRegister,
+  findUserById,
+  postUserLogin,
+  postUserSeeding,
+  findUserByEmail,
+  findUserByUsername,
+} = require("../models/userModels");
+const dataUser = require("../data/user.json");
 
 const userTypeDefs = `#graphql
     type User {
@@ -28,17 +36,13 @@ const userTypeDefs = `#graphql
         password: String!
     }
 
-    input UserLoginInput {
-        name: String!
-        password: String!
-    }  
-
     type Query {
-      userLogin: ResponseLoginUser
+        userLogin(email: String!, password: String!): ResponseLoginUser
     }
 
     type Mutation {
         userRegister(input: UserRegisterInput): ResponseRegisterUser
+        userSeeding: ResponseSeeding
     }
 `;
 
@@ -46,37 +50,48 @@ const userResolvers = {
   Query: {
     userLogin: async (_, args) => {
       try {
-        const database = getDatabase();
-        const userCollection = database.collection("user");
-
         const { email, password } = args;
-        const findUser = await userCollection.findOne({
-          email,
-        });
+        const getLogin = await postUserLogin(email, password);
 
         return {
           statusCode: 200,
           message: "Successfully Login",
+          data: { token: getLogin },
         };
       } catch (error) {
-        throw new GraphQLError("An error while Login user");
+        console.log(error, "<<< from login");
+        throw new GraphQLError(`${error.message}`);
       }
     },
   },
   Mutation: {
-    userRegister: async (_, args) => {
+    userSeeding: async () => {
+      try {
+        dataUser.forEach((el) => {
+          el.password = hashPassword(el.password);
+        });
+        await postUserSeeding(dataUser);
+
+        return {
+          statusCode: 200,
+          message: "Successfully Seeding User",
+        };
+      } catch (error) {
+        console.log(error, "<<< from Seeding user");
+        throw new GraphQLError(`${error.message}`);
+      }
+    },
+    userRegister: async (_, args, context) => {
       try {
         const { name, username, email, password } = args.input;
-        const payload = {
+
+        const registerUser = await postUserRegister(
           name,
           username,
           email,
-          password: hashPassword(password),
-        };
-        const registerUser = await postUserRegister(payload);
+          password
+        );
         const user = await findUserById(new ObjectId(registerUser.insertedId));
-
-        console.log(user, "<<< data from user");
 
         return {
           statusCode: 200,
@@ -84,9 +99,8 @@ const userResolvers = {
           data: user,
         };
       } catch (error) {
-        console.log(error);
-        throw new GraphQLError("An error while Register user");
-        // console.log(error);
+        // console.log(error, "<<< from user register");
+        throw new GraphQLError(`${error.message}`);
       }
     },
   },

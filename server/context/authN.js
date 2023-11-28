@@ -2,6 +2,7 @@ const { findUserByEmail } = require("../models/userModels");
 const { verifyToken } = require("../utils");
 
 const authN = async (req) => {
+  // console.log(req.headers);
   const { authorization } = req.headers;
   const token = authorization.split(" ")[1];
   const payload = verifyToken(token);
@@ -16,7 +17,7 @@ const authN = async (req) => {
     });
 
   return {
-    id: payload._id,
+    id: payload.id,
     email: payload.email,
   };
 };
