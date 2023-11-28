@@ -1,15 +1,22 @@
 const responseTypeDefs = `#graphql
     interface Response {
-        statusCode: Int
-        message: String
+        statusCode: Int!
+        message: String!
         error: String
     }
 
     type ResponseRegisterUser implements Response {
-        statusCode: Int
-        message: String
+        statusCode: Int!
+        message: String!
         error: String
-        data: User
+        data: UserNoPassword
+    }
+
+    type ResponseLoginUser implements Response {
+        statusCode: Int!
+        message: String!
+        error: String
+        access_token: String
     }
 `;
 

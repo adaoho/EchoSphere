@@ -4,7 +4,7 @@ const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 const databaseName = "TokTik";
 
-async function clientConnection() {
+async function connect() {
   try {
     await client.connect();
     console.log("Successfully to connect mongodb");
@@ -15,11 +15,11 @@ async function clientConnection() {
   }
 }
 
-function getDatabse() {
+function getDatabase() {
   return client.db(databaseName);
 }
 
 module.exports = {
-  clientConnection,
-  getDatabse,
+  connect,
+  getDatabase,
 };
