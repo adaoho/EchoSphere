@@ -84,15 +84,15 @@ const postUserLogin = async (email, password) => {
       !comparePassword(password, findUser.password) ||
       !email === findUser.email
     )
-      throw { name: "InvalidLogin" };
+      throw { name: "invalidLogin" };
 
     const payload = { id: findUser._id, email: findUser.email };
     const token = signToken(payload);
     return token;
   } catch (error) {
-    // console.log(error);
+    console.log(error, "<<< error login");
     switch (error.name) {
-      case "invalidEmail":
+      case "UserNotFound":
         throw new GraphQLError("User Not Found");
       case "invalidLogin":
         throw new GraphQLError("Invalid Email/Password");
@@ -111,3 +111,5 @@ module.exports = {
   postUserLogin,
   postUserSeeding,
 };
+
+// /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,4}$/

@@ -38,6 +38,7 @@ const userTypeDefs = `#graphql
 
     type Query {
         userLogin(email: String!, password: String!): ResponseLoginUser
+        userSearch(username: String!): ResponseSearchUser
     }
 
     type Mutation {
@@ -59,9 +60,19 @@ const userResolvers = {
           data: { token: getLogin },
         };
       } catch (error) {
-        console.log(error, "<<< from login");
+        // console.log(error.message, "<<< from login");
         throw new GraphQLError(`${error.message}`);
       }
+    },
+    userSearch: async (_, args) => {
+      const { username } = args;
+      const getUser = await findUserByUsername(username);
+
+      return {
+        statusCode: 200,
+        message: "Successfully get User by Username",
+        data: getUser,
+      };
     },
   },
   Mutation: {
@@ -77,8 +88,8 @@ const userResolvers = {
           message: "Successfully Seeding User",
         };
       } catch (error) {
-        console.log(error, "<<< from Seeding user");
-        throw new GraphQLError(`${error.message}`);
+        // console.log(error, "<<< from Seeding user");
+        throw new GraphQLError("An error while Seeding user");
       }
     },
     userRegister: async (_, args, context) => {

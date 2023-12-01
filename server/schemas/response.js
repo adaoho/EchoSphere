@@ -23,6 +23,13 @@ const responseTypeDefs = `#graphql
         data: ResponseLoginUserToken
     }
 
+    type ResponseSearchUser implements Response {
+        statusCode: Int!
+        message: String!
+        error: String
+        data: UserNoPassword
+    }
+
     type ResponseSeeding {
         statusCode: Int!
         message: String
