@@ -91,7 +91,11 @@ const TouchButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-const RegisterScreen = () => {
+const KeyboardAvoidingView = styled.KeyboardAvoidingView`
+  width: 100%;
+`;
+
+const RegisterScreen = ({ navigation }) => {
   const onLogin = () => {
     // Dialog.show({
     //   type: ALERT_TYPE.SUCCESS,
@@ -127,21 +131,26 @@ const RegisterScreen = () => {
           </ContainerHeader>
 
           {/* Form */}
-          <FormContainer>
-            <TextInput placeholder="input your name" />
-            <TextInput placeholder="input your username" />
-            <TextInput placeholder="input your email" />
-            <TextInput placeholder="input your password" />
-            <SignInButton onPress={() => onLogin()}>
-              <TextButton>Create Account</TextButton>
-            </SignInButton>
-          </FormContainer>
+          <KeyboardAvoidingView behavior={"padding"}>
+            <FormContainer>
+              <TextInput placeholder="input your name" />
+              <TextInput placeholder="input your username" />
+              <TextInput placeholder="input your email" />
+              <TextInput placeholder="input your password" />
+              <SignInButton onPress={() => onLogin()}>
+                <TextButton>Create Account</TextButton>
+              </SignInButton>
+            </FormContainer>
+          </KeyboardAvoidingView>
 
           {/* Footer */}
           <ContainerFooter>
             <TextButton>Already have an account?</TextButton>
             <TouchButton>
               <TextButton
+                onPress={() => {
+                  navigation.navigate("Login");
+                }}
                 style={{ marginTop: 3, textDecorationLine: "underline" }}
               >
                 Try for Login

@@ -8,11 +8,12 @@ const CardContent = styled.View`
   padding-left: 20px;
   padding-right: 20px;
   align-items: center;
-  height: 80px;
+  height: 85px;
   width: 95%;
   border-radius: 15px;
   background-color: #101010;
-  /* background-color: #a7a7a7; */
+  justify-content: center;
+  column-gap: 15px;
 `;
 
 const CardProfile = styled.View`
@@ -30,44 +31,31 @@ const NormalText = styled.Text`
 const CardUser = styled.View`
   position: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  width: 156px;
-`;
-
-const FollowButton = styled.TouchableOpacity`
-  background-color: #0b9d10;
-  position: flex;
   justify-content: center;
-  align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  border-radius: 10px;
+  align-items: start;
+  row-gap: 5px;
+  width: 75%;
+  height: 100%;
 `;
 
-const CardUserComponent = () => {
+const CardCommentUser = () => {
   return (
     <>
       <CardContent>
         <CardProfile />
         <CardUser>
           <NormalText
-            style={{ fontSize: 18, fontWeight: "bold", textAlign: "left" }}
+            style={{ fontSize: 14, fontWeight: "bold", textAlign: "left" }}
           >
-            Susanti Jaya Karta
+            Adnan Nugroho
           </NormalText>
-          <NormalText style={{ fontSize: 14, color: "gray" }}>
-            @uhuoho
+          <NormalText style={{ fontSize: 15, color: "gray" }}>
+            Wow Bagus sekali ini tampilannya! Wow sekarang Banget
           </NormalText>
         </CardUser>
-        <FollowButton>
-          <NormalText style={{ fontSize: 15 }}>Follow</NormalText>
-        </FollowButton>
       </CardContent>
     </>
   );
 };
 
-export default CardUserComponent;
+export default CardCommentUser;

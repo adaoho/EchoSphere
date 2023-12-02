@@ -1,5 +1,7 @@
 import styled from "styled-components/native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Container = styled.View`
   position: flex;
@@ -84,7 +86,15 @@ const TouchButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-const LoginScreen = () => {
+const KeyboardAvoidingView = styled.KeyboardAvoidingView`
+  width: 100%;
+`;
+
+const LoginScreen = ({ navigation }) => {
+  const { setIsSignedIn } = useContext(AuthContext);
+  const pressLogin = () => {
+    setIsSignedIn(true);
+  };
   return (
     <>
       <Container>
@@ -102,18 +112,24 @@ const LoginScreen = () => {
         </ContainerHeader>
 
         {/* Form */}
-        <FormContainer>
-          <TextInput placeholder="input your email" />
-          <TextInput placeholder="input your password" />
-          <SignInButton>
-            <TextButton>Signed In</TextButton>
-          </SignInButton>
-        </FormContainer>
+        <KeyboardAvoidingView behavior={"padding"}>
+          <FormContainer>
+            <TextInput placeholder="input your email" />
+            <TextInput placeholder="input your password" />
+            <SignInButton onPress={() => pressLogin()}>
+              <TextButton>Signed In</TextButton>
+            </SignInButton>
+          </FormContainer>
+        </KeyboardAvoidingView>
 
         {/* Footer */}
         <ContainerFooter>
           <TextButton>Wanna Create an Account?</TextButton>
-          <TouchButton>
+          <TouchButton
+            onPress={() => {
+              navigation.navigate("Register");
+            }}
+          >
             <TextButton
               style={{ marginTop: 3, textDecorationLine: "underline" }}
             >

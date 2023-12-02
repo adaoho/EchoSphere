@@ -1,8 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
-import TabBar from "../components/TabBar";
-import CardUser from "../components/CardUser";
+import CardUserComponent from "../components/CardUser";
 
 const Container = styled.View`
   flex: 1;
@@ -12,18 +11,18 @@ const Container = styled.View`
   height: 100%;
   background-color: #141414;
   padding-left: 2%;
-  padding-right: 6%;
   position: relative;
 `;
 
 const Gradient = styled(LinearGradient)`
-  height: 25%;
+  height: 8%;
   justify-content: space-between;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   z-index: 0;
+  backdrop-filter: blur(10px);
 `;
 
 const TextInput = styled.TextInput`
@@ -42,8 +41,8 @@ const SearchContainer = styled.View`
   position: flex;
   justify-content: center;
   align-items: start;
-  width: 380px;
-  top: 10%;
+  width: 355px;
+  top: 3%;
 `;
 
 const ButtonSearch = styled.TouchableOpacity`
@@ -64,11 +63,12 @@ const Title = styled.Text`
 `;
 
 const TitleContainer = styled.View`
-  position: flex;
+  flex: 1.8;
   flex-direction: column;
-  width: 100%;
+  width: 95%;
   height: 20%;
-  left: 3%;
+  right: 3%;
+  left: 4%;
   top: 10%;
   align-items: start;
   row-gap: 8px;
@@ -90,7 +90,7 @@ const Text = styled.Text`
 
 const FilterContainer = styled.View`
   position: flex;
-  margin-top: 25px;
+  margin-top: 4%;
   flex-direction: row;
   column-gap: 10px;
   width: 100%;
@@ -98,20 +98,34 @@ const FilterContainer = styled.View`
 `;
 
 const UserContainer = styled.View`
-  flex: 1;
+  flex: 4.5;
+  padding-top: 5px;
   justify-content: start;
   align-items: center;
   width: 100%;
   height: 100px;
-  background-color: red;
+  row-gap: 10%;
 `;
 
-const SearchScreen = () => {
+const ScrollView = styled.ScrollView`
+  width: 100%;
+  right: 1%;
+  position: flex;
+  flex-direction: column;
+`;
+
+const EmptyView = styled.View`
+  position: flex;
+  height: 90px;
+  width: 100%;
+`;
+
+const SearchScreen = ({ navigation }) => {
   return (
     <>
       <Container>
         <TitleContainer>
-          <Title>Search User</Title>
+          <Title style={{ fontSize: 35 }}>Find Your Friend</Title>
           <SearchContainer>
             <TextInput
               placeholder="Search by Username"
@@ -133,12 +147,29 @@ const SearchScreen = () => {
         </TitleContainer>
 
         <UserContainer>
-          <CardUser />
+          <ScrollView
+            contentContainerStyle={{
+              alignItems: "center",
+              rowGap: 8,
+              paddingTop: 5,
+            }}
+          >
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <EmptyView />
+          </ScrollView>
         </UserContainer>
       </Container>
 
       {/* Footer */}
-      <TabBar />
       <Gradient
         locations={[0, 0.26, 0, 1]}
         colors={["#00000000", "#00000000", "#00000000", "#00000090"]}

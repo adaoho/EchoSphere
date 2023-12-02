@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
-import TabBar from "../components/TabBar";
 import { LinearGradient } from "expo-linear-gradient";
+import CardUserComponent from "../components/CardUser";
 
 const Container = styled.View`
   flex: 1;
@@ -74,37 +74,10 @@ const NormalText = styled.Text`
   font-size: 20px;
 `;
 
-const CardContent = styled.View`
-  position: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-left: 20px;
-  padding-right: 20px;
-  align-items: center;
-  height: 80px;
-  width: 95%;
-  border-radius: 15px;
-  background-color: #101010;
-`;
-
-const CardProfile = styled.View`
-  background-color: gray;
-  height: 60px;
-  width: 60px;
-  border-radius: 16px;
-`;
-
-const CardUser = styled.View`
-  position: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  width: 156px;
-`;
-
 const ContainerContent = styled.View`
-  padding: 14px;
-  padding-top: 40px;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 8%;
   flex: 3;
   justify-content: center;
   align-items: center;
@@ -112,31 +85,19 @@ const ContainerContent = styled.View`
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  background-color: #252525;
+  background-color: #141414;
   column-gap: 8px;
   row-gap: 8px;
 `;
 
 const Gradient = styled(LinearGradient)`
-  height: 25%;
+  height: 7%;
   justify-content: space-between;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   z-index: 0;
-`;
-
-const FollowButton = styled.TouchableOpacity`
-  background-color: #0b9d10;
-  position: flex;
-  justify-content: center;
-  align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  border-radius: 10px;
 `;
 
 const TextInput = styled.TextInput`
@@ -170,7 +131,19 @@ const ButtonSearch = styled.TouchableOpacity`
   border-radius: 10px;
 `;
 
-const ProfileScreen = () => {
+const ScrollView = styled.ScrollView`
+  width: 100%;
+  position: flex;
+  flex-direction: column;
+`;
+
+const EmptyView = styled.View`
+  position: flex;
+  height: 90px;
+  width: 100%;
+`;
+
+const ProfileScreen = ({ navigation }) => {
   return (
     <>
       <Container>
@@ -230,22 +203,21 @@ const ProfileScreen = () => {
 
         {/* Container Followers */}
         <ContainerContent>
-          {/* Component Followers */}
-          <CardContent>
-            <CardProfile />
-            <CardUser>
-              <NormalText style={{ fontSize: 18, fontWeight: "bold" }}>
-                Adnan Nugroho
-              </NormalText>
-              <NormalText style={{ fontSize: 14, color: "gray" }}>
-                @uhuoho
-              </NormalText>
-            </CardUser>
-            <FollowButton>
-              <NormalText style={{ fontSize: 15 }}>Follow</NormalText>
-            </FollowButton>
-          </CardContent>
-          {/* Component Followers */}
+          <ScrollView
+            contentContainerStyle={{
+              alignItems: "center",
+              rowGap: 8,
+              paddingTop: 5,
+            }}
+          >
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <CardUserComponent />
+            <EmptyView />
+          </ScrollView>
         </ContainerContent>
 
         <SearchContainer>
@@ -259,10 +231,9 @@ const ProfileScreen = () => {
         </SearchContainer>
       </Container>
 
-      <TabBar />
       <Gradient
-        locations={[0, 0.26, 0, 1]}
-        colors={["#00000000", "#00000000", "#00000000", "#00000090"]}
+        locations={[0, 1]}
+        colors={["#00000000", "#00000090"]}
       ></Gradient>
     </>
   );

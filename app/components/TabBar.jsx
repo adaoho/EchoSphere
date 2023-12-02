@@ -1,76 +1,96 @@
 import styled from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import HomeScreenCard from "../screens/HomeScreenCard";
+import ProfileScreen from "../screens/ProfileScreen";
+import SearchScreen from "../screens/SearchScreen";
+import PostCreateScreen from "../screens/PostCreateScreen";
+import { BlurView } from "expo-blur";
+import HomeStack from "../stacks/HomeStack";
+import MessageScreen from "../screens/MessageScreen";
 
-const Container = styled.View`
-  align-items: start;
-  justify-content: space-between;
-  height: 90px;
-  background-color: #ffffff05;
-  width: 100%;
-  position: flex;
-  position: absolute;
-  bottom: 0;
-  padding-left: 7%;
-  padding-right: 7%;
-  padding-top: 2%;
-  z-index: 1;
-  border-top-width: 1px;
-  border-top-color: #ffffff50;
-  flex-direction: row;
-  column-gap: 8px;
-`;
-
-const Text = styled.Text`
-  color: white;
-  font-size: 12px;
-`;
-
-const Icon = styled.View`
-  position: flex;
-  flex-direction: column;
-  row-gap: 4px;
-  justify-content: center;
-  align-items: center;
-`;
-
-const IconAdd = styled.View`
-  position: flex;
-  padding-left: 4px;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 40px;
-  border-radius: 10px;
-  background-color: white;
-`;
-
-const IconAddCont = styled.View``;
+const Tab = createBottomTabNavigator();
 
 const TabBar = () => {
   return (
-    <Container>
-      <Icon>
-        <Ionicons name="home-outline" color="white" size={24} />
-        <Text>Home</Text>
-      </Icon>
-      <Icon>
-        <Ionicons name="people-outline" color="white" size={24} />
-        <Text>Friends</Text>
-      </Icon>
-      <Icon>
-        <IconAdd>
-          <Ionicons name="add-sharp" color="black" size={28} />
-        </IconAdd>
-      </Icon>
-      <Icon>
-        <Ionicons name="mail-open-outline" color="white" size={24} />
-        <Text>Message</Text>
-      </Icon>
-      <Icon>
-        <Ionicons name="person-outline" color="white" size={24} />
-        <Text>Profile</Text>
-      </Icon>
-    </Container>
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        showLabel: false,
+        tabBarStyle: {
+          position: "absolute",
+          backgroundColor: "#00000080",
+          paddingHorizontal: 30,
+        },
+        tabBarLabelStyle: { fontSize: 10, color: "white" },
+        tabBarShowLabel: false,
+        tabBarBackground: () => (
+          <BlurView
+            tint="dark"
+            intensity={20}
+            style={{ width: "100%", height: "100%" }}
+          />
+        ),
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeStack}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => {
+            const iconName = focused ? "home" : "home-outline";
+            return <Ionicons name={iconName} color="white" size={24} />;
+          },
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Friends"
+        component={SearchScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => {
+            const iconName = focused ? "ios-people" : "ios-people-outline";
+            return <Ionicons name={iconName} color="white" size={24} />;
+          },
+          headerShown: false,
+        }}
+      />
+
+      <Tab.Screen
+        name="Post"
+        component={PostCreateScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => {
+            const iconName = focused ? "add-circle" : "add-circle-outline";
+            return <Ionicons name={iconName} color="white" size={50} />;
+          },
+          tabBarIconStyle: { top: 4 },
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Message"
+        component={MessageScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => {
+            const iconName = focused ? "mail-open" : "mail-open-outline";
+            return <Ionicons name={iconName} color="white" size={26} />;
+          },
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => {
+            const iconName = focused ? "person" : "person-outline";
+            return <Ionicons name={iconName} color="white" size={24} />;
+          },
+          headerShown: false,
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
