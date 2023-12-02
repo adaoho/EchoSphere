@@ -1,3 +1,4 @@
+const { GraphQLError } = require("graphql");
 const { findUserByEmail } = require("../models/userModels");
 const { verifyToken } = require("../utils");
 

@@ -1,7 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
-import CardUserComponent from "../components/CardUser";
 
 const Container = styled.View`
   flex: 1;

@@ -1,4 +1,4 @@
-const responseTypeDefs = `#graphql
+const responseUserTypeDefs = `#graphql
     interface Response {
         statusCode: Int!
         message: String!
@@ -37,5 +37,5 @@ const responseTypeDefs = `#graphql
 `;
 
 module.exports = {
-  responseTypeDefs,
+  responseUserTypeDefs,
 };

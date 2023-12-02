@@ -1,12 +1,10 @@
 import styled from "styled-components/native";
-import { FontAwesome5 } from "@expo/vector-icons";
 import {
   ALERT_TYPE,
   Dialog,
   AlertNotificationRoot,
   Toast,
 } from "react-native-alert-notification";
-import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
 const Container = styled.View`
@@ -127,6 +125,10 @@ const PostCreateScreen = ({ navigation }) => {
             <SearchContainer>
               <TextInput
                 placeholder="Your Content Title"
+                placeholderTextColor="gray"
+              />
+              <TextInput
+                placeholder="Your Content Description"
                 placeholderTextColor="gray"
               />
               <TextInput

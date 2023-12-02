@@ -4,18 +4,26 @@ if (process.env.NODE_ENV !== "production") {
 
 const { ApolloServer } = require("@apollo/server");
 const PORT = process.env.PORT || 3000;
-const { startStandaloneServer } = require("@apollo/server/standalone");
 const mongoConnection = require("./config/mongoConnection");
-const { userTypeDefs, userResolvers } = require("./schemas/user");
-const { responseTypeDefs } = require("./schemas/response");
-const { GraphQLError } = require("graphql");
-const { verifyToken } = require("./utils");
-const { findUserByEmail } = require("./models/userModels");
+const { startStandaloneServer } = require("@apollo/server/standalone");
 const { authN } = require("./context/authN");
+const { userTypeDefs, userResolvers } = require("./schemas/user");
+const { postTypeDefs, postResolvers } = require("./schemas/post");
+const { responseUserTypeDefs } = require("./schemas/responseUser");
+const { responsePostTypeDefs } = require("./schemas/responsePost");
+const { followingTypeDefs, followingResolvers } = require("./schemas/follow");
+const { responseFollowType } = require("./schemas/responseFollow");
 
 const server = new ApolloServer({
-  typeDefs: [userTypeDefs, responseTypeDefs],
-  resolvers: [userResolvers],
+  typeDefs: [
+    userTypeDefs,
+    responseUserTypeDefs,
+    postTypeDefs,
+    responsePostTypeDefs,
+    followingTypeDefs,
+    responseFollowType,
+  ],
+  resolvers: [userResolvers, postResolvers, followingResolvers],
 });
 
 (async () => {
@@ -38,10 +46,3 @@ const server = new ApolloServer({
     console.log(error);
   }
 })();
-
-// throw new GraphQLError("Terjadi Error Nih", {
-//   extensions: {
-//     http: "401",
-//     code: "NOT_ALLOWED_TO_ACCESS",
-//   },
-// });

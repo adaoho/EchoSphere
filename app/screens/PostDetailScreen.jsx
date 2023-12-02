@@ -1,12 +1,8 @@
-import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import { KeyboardAvoidingView, Platform, TouchableOpacity } from "react-native";
 import CardCommentUser from "../components/CardCommentUser";
-
-const imageUnsplash = (image) => {
-  return `https://source.unsplash.com/random/900×900/?${image}`;
-};
+import { imageUnsplash } from "../constant/imageUnsplash";
 
 const DetailImage = styled.Image.attrs({ resizeMode: "cover" })`
   height: 100%;

@@ -20,6 +20,7 @@ const userTypeDefs = `#graphql
         username: String!
         email: String!
         password: String!
+        profilePicture: String
     }
 
     type UserNoPassword {
@@ -27,6 +28,7 @@ const userTypeDefs = `#graphql
         name: String
         username: String!
         email: String!
+        profilePicture: String
     }
 
     input UserRegisterInput {
@@ -94,13 +96,14 @@ const userResolvers = {
     },
     userRegister: async (_, args, context) => {
       try {
-        const { name, username, email, password } = args.input;
+        const { name, username, email, password, profilePicture } = args.input;
 
         const registerUser = await postUserRegister(
           name,
           username,
           email,
-          password
+          password,
+          profilePicture
         );
         const user = await findUserById(new ObjectId(registerUser.insertedId));
 
