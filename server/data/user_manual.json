@@ -1,5 +1,6 @@
 [
   {
+    "_id": { "$oid": "6565bf389ae65cda7e47a951" },
     "name": "Adnan Nugroho",
     "username": "adaoho",
     "email": "adaoho@mail.com",
@@ -7,6 +8,7 @@
     "password": "12345678"
   },
   {
+    "_id": { "$oid": "6565bf389ae65cda7e47a952" },
     "name": "Nugroho Adnan",
     "username": "ohoada",
     "email": "ohoada@mail.com",
@@ -14,6 +16,7 @@
     "password": "12345678"
   },
   {
+    "_id": { "$oid": "6565cffa66609ea38a6b1a1f" },
     "name": "Maulana",
     "username": "maul",
     "email": "maul@mail.com",
@@ -21,6 +24,7 @@
     "password": "12345678"
   },
   {
+    "_id": { "$oid": "6565d01c66609ea38a6b1a20" },
     "name": "Farach Diba",
     "username": "diba",
     "email": "diba@mail.com",

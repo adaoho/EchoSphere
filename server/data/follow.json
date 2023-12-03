@@ -1,0 +1,32 @@
+[
+  {
+    "_id": { "$oid": "6565d01c66609ea38a6b1a20" },
+    "followingId": {
+      "_id": { "$oid": "6565d01c66609ea38a6b1a20" },
+      "name": "Farach Diba",
+      "username": "diba"
+    },
+    "followersId": {
+      "_id": { "$oid": "6565cffa66609ea38a6b1a1f" },
+      "name": "Maulana",
+      "username": "maul"
+    },
+    "createdAt": "2023-12-09 19:27:54.037 +0700",
+    "updatedAt": "2023-12-09 19:27:54.037 +0700"
+  },
+  {
+    "_id": { "$oid": "4575d01c66609ea38a6b1b19" },
+    "followingId": {
+      "_id": { "$oid": "6565cffa66609ea38a6b1a1f" },
+      "name": "Maulana",
+      "username": "maul"
+    },
+    "followersId": {
+      "_id": { "$oid": "6565bf389ae65cda7e47a951" },
+      "name": "Adnan Nugroho",
+      "username": "adaoho"
+    },
+    "createdAt": "2023-11-23 19:27:54.037 +0700",
+    "updatedAt": "2023-11-23 19:27:54.037 +0700"
+  }
+]

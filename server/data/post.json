@@ -1,0 +1,90 @@
+[
+  {
+    "_id": { "$oid": "6565bf329ae64cab7e47a911" },
+    "content": "This is a post",
+    "description": "This is a post about GraphQL and embedded documents.",
+    "authorId": {
+      "_id": { "$oid": "6565bf389ae65cda7e47a952" },
+      "name": "Nugroho Adnan",
+      "username": "ohoada"
+    },
+    "tags": ["programming", "fruit"],
+    "imgUrl": "https://source.unsplash.com/random/900×900/?fruit",
+    "comments": [
+      {
+        "_id": { "$oid": "6565bf329ae64cab7e47a821" },
+        "content": "Great post, What a Comment!",
+        "authorId": {
+          "_id": { "$oid": "6565bf389ae65cda7e47a951" },
+          "name": "Adnan Nugroho",
+          "username": "adaoho"
+        }
+      },
+      {
+        "_id": { "$oid": "6565bf329ae64cab7e47a827" },
+        "content": "Great post!",
+        "authorId": {
+          "_id": { "$oid": "6565bf389ae65cda7e47a951" },
+          "name": "Adnan Nugroho",
+          "username": "adaoho"
+        }
+      }
+    ],
+    "likes": [
+      {
+        "_id": { "$oid": "6563bf321ab64aad7e47a827" },
+        "authorId": {
+          "_id": { "$oid": "6565bf389ae65cda7e47a951" },
+          "name": "Adnan Nugroho",
+          "username": "adaoho"
+        }
+      }
+    ],
+    "createdAt": "2023-11-22 19:27:54.037 +0700",
+    "updatedAt": "2023-11-22 19:27:54.037 +0700"
+  },
+  {
+    "_id": { "$oid": "3565bf329ae62cac7e45b911" },
+    "content": "This is your Second Post",
+    "description": "This is a post about it's about another Fruit.",
+    "authorId": {
+      "_id": { "$oid": "6565bf389ae65cda7e47a952" },
+      "name": "Nugroho Adnan",
+      "username": "ohoada"
+    },
+    "tags": ["programming", "fruit"],
+    "imgUrl": "https://source.unsplash.com/random/900×900/?fruit+2",
+    "comments": [
+      {
+        "_id": { "$oid": "6565bf329ae64cab7e47a821" },
+        "content": "Great post, This is my Second Comment!",
+        "authorId": {
+          "_id": { "$oid": "6565bf389ae65cda7e47a951" },
+          "name": "Adnan Nugroho",
+          "username": "adaoho"
+        }
+      },
+      {
+        "_id": { "$oid": "6565bf329ae64cab7e47a827" },
+        "content": "Great post Second Post!",
+        "authorId": {
+          "_id": { "$oid": "6565bf389ae65cda7e47a951" },
+          "name": "Adnan Nugroho",
+          "username": "adaoho"
+        }
+      }
+    ],
+    "likes": [
+      {
+        "_id": { "$oid": "6563bf321ab64aad7e47a827" },
+        "authorId": {
+          "_id": { "$oid": "6565bf389ae65cda7e47a951" },
+          "name": "Adnan Nugroho",
+          "username": "adaoho"
+        }
+      }
+    ],
+    "createdAt": "2023-12-01 19:27:54.037 +0700",
+    "updatedAt": "2023-12-01 19:27:54.037 +0700"
+  }
+]

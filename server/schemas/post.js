@@ -1,15 +1,5 @@
 const { GraphQLError } = require("graphql");
 const { ObjectId } = require("mongodb");
-const { hashPassword } = require("../utils");
-const {
-  postUserRegister,
-  findUserById,
-  postUserLogin,
-  postUserSeeding,
-  findUserByEmail,
-  findUserByUsername,
-} = require("../models/userModels");
-const dataUser = require("../data/user.json");
 
 const postTypeDefs = `#graphql
     type UserDetail {
@@ -29,8 +19,6 @@ const postTypeDefs = `#graphql
         _id: ID
         content: String
         authordId: UserDetail
-        createdAt: String
-        updatedAt: String
     }
 
     type Post {
@@ -54,8 +42,8 @@ const postTypeDefs = `#graphql
     }
 
     type Query {
-        getPostOne: ResponseGetPostAll
-        getPostOne: ResponseGetPostOne
+        getPosts: ResponseGetPostAll
+        getPostById(_id: ID!): ResponseGetPostOne
     }
 
     type Mutation {
@@ -67,7 +55,7 @@ const postTypeDefs = `#graphql
 
 const postResolvers = {
   Query: {
-    getPostAll: async (_, args) => {
+    getPosts: async (_, args) => {
       try {
         return {
           statusCode: 200,
@@ -79,8 +67,9 @@ const postResolvers = {
         // throw new GraphQLError(`${error.message}`);
       }
     },
-    getPostOne: async (_, args) => {
+    getPostById: async (_, args) => {
       try {
+        const { _id } = args;
         return {
           statusCode: 200,
           message: "Successfully Login",

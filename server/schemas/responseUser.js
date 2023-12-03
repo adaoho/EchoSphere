@@ -30,6 +30,13 @@ const responseUserTypeDefs = `#graphql
         data: UserNoPassword
     }
 
+    type ResponseUserById implements Response {
+        statusCode: Int!
+        message: String!
+        error: String
+        data: UserNoPassword
+    }
+
     type ResponseSeeding {
         statusCode: Int!
         message: String

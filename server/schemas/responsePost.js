@@ -12,7 +12,7 @@ const responsePostTypeDefs = `#graphql
         data: [Post]
     }
 
-    type ResponseGetPostAll implements Response {
+    type ResponseGetPostOne implements Response {
         statusCode: Int!
         message: String!
         error: String

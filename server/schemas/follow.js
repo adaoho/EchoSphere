@@ -1,13 +1,6 @@
 const { GraphQLError } = require("graphql");
 const { ObjectId } = require("mongodb");
-const {
-  findFollowById,
-  findFollowing,
-  findFollowers,
-  findAllFollow,
-  postFollow,
-  postFollow,
-} = require("../models/followModels");
+const { findFollowById, postFollow } = require("../models/followModels");
 const dataUser = require("../data/user.json");
 
 const followingTypeDefs = `#graphql
@@ -25,8 +18,8 @@ const followingTypeDefs = `#graphql
 
     type Follow {
         _id: ID
-        followingId: [UserFollowing]
-        followerId: [UserFollower]
+        followingId: UserFollowing
+        followerId: UserFollower
     }
 
     type OneFollow {
@@ -35,29 +28,12 @@ const followingTypeDefs = `#graphql
         followerId: UserFollower
     }
 
-    type Query {
-        getFollowAll: ResponseGetFollow
-    }
-
     type Mutation {
-        followCreate(followerId: ID!): ResponseCreateFollow
+        followCreate(followerId: String!): ResponseCreateFollow
     }
 `;
 
 const followingResolvers = {
-  Query: {
-    getFollowAll: async (_, args) => {
-      try {
-        return {
-          statusCode: 200,
-          message: "Successfully Login",
-        };
-      } catch (error) {
-        console.log(error);
-        // throw new GraphQLError(`${error.message}`);
-      }
-    },
-  },
   Mutation: {
     followCreate: async (_, args, context) => {
       try {
@@ -66,18 +42,18 @@ const followingResolvers = {
 
         console.log(id, "<<< from id followCreate");
 
-        const postFollow = await postFollow(
+        const createFollow = await postFollow(
           new ObjectId(followerId),
           new ObjectId(id)
         );
 
         const follow = await findFollowById(
-          new ObjectId(postFollow.insertedId)
+          new ObjectId(createFollow.insertedId)
         );
 
         return {
           statusCode: 200,
-          message: "Successfully Seeding User",
+          message: `Successfully Follow User Id ${id} `,
           data: follow,
         };
       } catch (error) {
